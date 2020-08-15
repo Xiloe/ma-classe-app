@@ -3,10 +3,11 @@
     {{ getData() }}
     <b-spinner v-if="isLoading" variant="primary" />
     <div v-else>
-      <b-alert show dismissible variant="warning">
-        Actuellement disponible uniquement pour l'établissement Albert Einstein,
-        Bagnols-sur-Cèze
-      </b-alert>
+      <div v-for="alert in jsonData.alerts" :key="alert.id">
+        <b-alert v-if="alert.show" show dismissible :variant="alert.variant">
+          {{ alert.text }}
+        </b-alert>
+      </div>
       <Classes-List :data="jsonData" />
       <div class="container-fluid text-center p-5">
         Copyleft © 2020 Xiloe, Woteck. This site is under MIT.
